@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <style xmlns="http://purl.org/net/xbiblio/csl" class="note" version="1.0" page-range-format="expanded" delimiter-precedes-last="never" et-al-min="4" et-al-use-first="1" demote-non-dropping-particle="sort-only">
-  <!-- Polyglot; we publish books and journals in German, English, and Italian. -->
+  <!-- Polyglot; journal publishes in German, English, and Italian. -->
   <info>
     <title>Bibliotheca Hertziana - Max Planck Institute for Art History</title>
     <title-short>BH</title-short>
@@ -143,7 +143,7 @@
           <text variable="title" font-style="italic"/>
         </else-if>
         <else>
-          <text variable="title" suffix="," quotes="true" font-style="normal"/>
+          <text variable="title" suffix="," quotes="true"/>
         </else>
       </choose>
     </group>
