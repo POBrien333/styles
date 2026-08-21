@@ -30,7 +30,7 @@
     <category citation-format="author-date"/>
     <category field="psychology"/>
     <summary>Adaptation en français canadien des normes de citation de l'APA (7e édition) basée sur le guide des Bibliothèques de l'Université de Montréal.</summary>
-    <updated>2026-03-10T21:06:28-04:00</updated>
+    <updated>2026-08-21T21:06:28-04:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
   <locale>
@@ -208,12 +208,8 @@
         <group delimiter=" ">
           <text variable="title" font-style="italic"/>
           <group prefix="(" suffix=")" delimiter=" ">
-            <choose>
-              <if variable="number">
-                <text term="issue" form="short"/>
-                <text variable="number"/>
-              </if>
-            </choose>
+            <label variable="number" form="short"/>
+            <text variable="number"/>
           </group>
           <text variable="genre" prefix="[" suffix="]" text-case="capitalize-first"/>
           <text variable="medium" prefix="[" suffix="]" text-case="capitalize-first"/>
@@ -223,12 +219,8 @@
         <group delimiter=" ">
           <text variable="title" font-style="italic"/>
           <group prefix="(" suffix=")" delimiter=" ">
-            <choose>
-              <if variable="version">
-                <text term="version"/>
-                <text variable="version"/>
-              </if>
-            </choose>
+            <label variable="version"/>
+            <text variable="version"/>
           </group>
           <group prefix="[" suffix="]" delimiter="; ">
             <text variable="genre" text-case="lowercase"/>
@@ -236,18 +228,11 @@
           </group>
         </group>
       </else-if>
-      <else-if type="book paper-conference" match="any">
+      <else-if type="book paper-conference map motion_picture song graphic speech post manuscript webpage" match="any">
         <group delimiter=" ">
           <text variable="title" font-style="italic"/>
           <text variable="genre" prefix="[" suffix="]" text-case="capitalize-first"/>
           <text variable="medium" prefix="[" suffix="]" text-case="capitalize-first"/>
-        </group>
-      </else-if>
-      <else-if type="map motion_picture song graphic speech post manuscript webpage" match="any">
-        <group delimiter=" ">
-          <text variable="title" font-style="italic"/>
-          <text variable="genre" prefix="[" suffix="]" text-case="lowercase"/>
-          <text variable="medium" prefix="[" suffix="]" text-case="lowercase"/>
         </group>
       </else-if>
       <else-if type="broadcast">
@@ -392,9 +377,7 @@
         </group>
       </if>
       <else-if type="article-newspaper">
-        <group delimiter=" " prefix=", ">
-          <text variable="page"/>
-        </group>
+        <text variable="page" prefix=", "/>
       </else-if>
       <else-if type="book graphic motion_picture song chapter paper-conference" match="any">
         <group prefix=" (" suffix=")" delimiter="; ">
@@ -408,10 +391,7 @@
               <text term="volume" form="short" suffix=" "/>
               <number variable="volume" form="numeric"/>
             </group>
-            <group>
-              <label variable="page" form="short" suffix=" "/>
-              <text variable="page"/>
-            </group>
+            <text macro="pages"/>
           </group>
           <text macro="secondary-contributors"/>
         </group>
@@ -471,17 +451,17 @@
         </if>
         <else-if type="entry-dictionary">
           <text macro="container-title"/>
-          <group prefix=" (" suffix=")">
-            <text variable="page" prefix="p. "/>
-          </group>
+          <text macro="pages" prefix=" (" suffix=")"/>
         </else-if>
         <else-if type="broadcast">
           <group prefix=" (" suffix=")">
             <choose>
               <if is-numeric="number">
                 <!-- Replace with label variable="number" if that becomes available -->
-                <text term="issue" suffix=" " form="short"/>
-                <text variable="number"/>
+                <group delimiter=" ">
+                  <label variable="issue" form="short"/>
+                  <text variable="number"/>
+                </group>
               </if>
               <else>
                 <text variable="number"/>
@@ -499,8 +479,11 @@
       <choose>
         <if type="entry-encyclopedia">
           <group prefix=" (" suffix=")" delimiter=", ">
-            <text variable="volume" prefix="Vol. "/>
-            <text variable="page" prefix="p. "/>
+            <group delimiter=" ">
+              <label variable="volume" form="short" text-case="capitalize-first"/>
+              <text variable="volume"/>
+            </group>
+            <text macro="pages"/>
           </group>
         </if>
       </choose>
@@ -538,7 +521,7 @@
               <text variable="container-title"/>
               <group delimiter=" ">
                 <!--change to label variable="section" as that becomes available -->
-                <text term="section" form="symbol"/>
+                <label variable="section" form="symbol"/>
                 <text variable="section"/>
               </group>
               <text variable="page"/>
@@ -564,6 +547,12 @@
         </group>
       </else>
     </choose>
+  </macro>
+  <macro name="pages">
+    <group delimiter=" ">
+      <label variable="page" form="short"/>
+      <text variable="page"/>
+    </group>
   </macro>
   <citation et-al-min="3" et-al-use-first="1" disambiguate-add-year-suffix="true" disambiguate-add-names="true" disambiguate-add-givenname="true" collapse="year" givenname-disambiguation-rule="primary-name">
     <sort>
